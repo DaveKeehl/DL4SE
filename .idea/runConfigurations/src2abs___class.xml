@@ -1,0 +1,16 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="src2abs - class" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="usi.si.seart.src2abs.Main" />
+    <module name="dl4se-src2abs" />
+    <option name="PROGRAM_PARAMETERS" value="class dl4se-src2abs/inputs/Class.java dl4se-src2abs/inputs/Abs.java dl4se-src2abs/inputs/idioms.csv" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="usi.si.seart.src2abs.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
