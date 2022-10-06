@@ -1,0 +1,1 @@
+package VAR_1 . VAR_2 ; public enum VAR_3 { VAR_4 , VAR_5 , VAR_6 , VAR_7 }

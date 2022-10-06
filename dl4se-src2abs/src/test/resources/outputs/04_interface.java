@@ -1,0 +1,1 @@
+package VAR_1 . VAR_2 ; public interface VAR_3 { public void METHOD_1 ( ) ; }

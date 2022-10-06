@@ -1,0 +1,1 @@
+package VAR_1 . VAR_2 ; public class App { public static void main ( String [ ] VAR_3 ) { VAR_4 . VAR_5 . METHOD_1 ( STRING_1 ) ; } }

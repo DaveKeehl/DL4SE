@@ -1,0 +1,1 @@
+package VAR_1 . VAR_2 ; class VAR_3 { private static final double VAR_4 = FLOAT_1 ; private double VAR_5 ; public VAR_3 ( ) { VAR_5 = FLOAT_2 ; } public VAR_3 ( double VAR_6 ) { VAR_5 = VAR_6 ; } public void METHOD_1 ( double VAR_6 ) { VAR_5 = VAR_6 ; } public double METHOD_2 ( ) { return VAR_5 ; } public double METHOD_3 ( ) { return VAR_4 * VAR_5 * VAR_5 ; } }

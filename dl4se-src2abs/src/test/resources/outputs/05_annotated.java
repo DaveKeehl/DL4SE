@@ -1,0 +1,1 @@
+package VAR_1 . VAR_2 ; import VAR_1 . VAR_3 . VAR_4 . VAR_5 . TYPE_1 ; import VAR_1 . VAR_3 . VAR_4 . VAR_5 . VAR_6 ; public class VAR_7 { ANNOTATION_1 public void METHOD_1 ( ) { TYPE_1 . METHOD_2 ( INT_1 , TYPE_2 . METHOD_3 ( INT_2 , INT_1 ) ) ; } ANNOTATION_1 public void METHOD_4 ( ) { TYPE_1 . METHOD_2 ( INT_2 , TYPE_2 . METHOD_5 ( INT_2 , INT_1 ) ) ; } }
