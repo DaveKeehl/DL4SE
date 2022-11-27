@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -20,6 +23,12 @@ public class UserSearchDto {
     String email;
     String organisation;
 
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    LocalDate registeredMin;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    LocalDate registeredMax;
+
     public boolean hasUid() {
         return uid != null && !uid.isBlank();
     }
@@ -30,5 +39,13 @@ public class UserSearchDto {
 
     public boolean hasOrganisation() {
         return organisation != null && !organisation.isBlank();
+    }
+
+    public boolean hasRegisteredMin() {
+        return registeredMin != null;
+    }
+
+    public boolean hasRegisteredMax() {
+        return registeredMax != null;
     }
 }

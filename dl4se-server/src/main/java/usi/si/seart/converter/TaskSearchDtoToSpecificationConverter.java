@@ -7,6 +7,8 @@ import usi.si.seart.dto.task.TaskSearchDto;
 import usi.si.seart.model.task.Task;
 import usi.si.seart.model.task.Task_;
 
+import java.time.LocalDate;
+
 public class TaskSearchDtoToSpecificationConverter implements Converter<TaskSearchDto, Specification<Task>> {
 
     @Override
@@ -17,10 +19,26 @@ public class TaskSearchDtoToSpecificationConverter implements Converter<TaskSear
             Specification<Task> other = withUuidContaining(source.getUuid());
             specification = specification.and(other);
         }
+        if (source.hasSubmittedMin()) {
+            Specification<Task> other = withSubmittedAfter(source.getSubmittedMin());
+            specification = specification.and(other);
+        }
+        if (source.hasSubmittedMax()) {
+            Specification<Task> other = withSubmittedBefore(source.getSubmittedMax());
+            specification = specification.and(other);
+        }
         return specification;
     }
 
     private Specification<Task> withUuidContaining(String pattern) {
         return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get(Task_.UUID).as(String.class), "%" + pattern + "%");
+    }
+
+    private Specification<Task> withSubmittedAfter(LocalDate date) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.greaterThanOrEqualTo(root.get(Task_.SUBMITTED).as(LocalDate.class), date);
+    }
+
+    private Specification<Task> withSubmittedBefore(LocalDate date) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.lessThanOrEqualTo(root.get(Task_.SUBMITTED).as(LocalDate.class), date);
     }
 }
