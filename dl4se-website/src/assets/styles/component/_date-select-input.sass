@@ -1,0 +1,29 @@
+.date-select-input-field
+  padding-right: calc(1.5em + 0.75rem)!important
+  @include fixed-height(40)
+  @extend .form-control
+  @extend .bg-light-gray
+  @extend .border-secondary
+  @extend .border-bottom
+  @extend .border-left-0
+  @extend .border-top-0
+  @extend .border-right-0
+  @extend .rounded-0
+
+.date-select-input-datepicker
+  @include fixed-height(40)
+  @extend .bg-light-gray
+
+.date-select-input-datepicker .dropdown-toggle
+  @extend .border-secondary
+  @extend .border-left-0
+  @extend .border-top-0
+  @extend .border-right-0
+  @extend .rounded-0
+
+.date-select-input-datepicker-menu .btn,
+.date-select-input-datepicker-menu .b-calendar-grid
+  @extend .rounded-0
+
+.date-select-input-datepicker-menu .b-calendar-grid:focus
+  border-color: inherit!important
