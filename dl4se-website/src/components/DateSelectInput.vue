@@ -10,7 +10,7 @@
     <b-input-group-append class="date-select-input-group">
       <b-datepicker :id="`${id}-datepicker`" :aria-controls="id"
                     v-model="calendar" @context="onContext" :min="min" :max="max" start-weekday="1"
-                    locale="en" :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+                    locale="en" :date-format-options="{ year: 'numeric', month: '2-digit', day: '2-digit' }"
                     selected-variant="secondary" button-variant="outline-secondary"
                     class="date-select-input-datepicker" menu-class="date-select-input-datepicker-menu"
                     hide-header button-only right :show-decade-nav="showDecadeNav"
