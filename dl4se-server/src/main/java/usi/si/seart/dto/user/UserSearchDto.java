@@ -8,9 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
-import java.util.Objects;
-import java.util.function.Predicate;
-
 @Getter
 @Setter
 @Builder
@@ -23,19 +20,15 @@ public class UserSearchDto {
     String email;
     String organisation;
 
-    private static Predicate<String> notNull = Objects::nonNull;
-    private static Predicate<String> notBlank = Predicate.not(String::isBlank);
-    private static Predicate<String> specified = notNull.and(notBlank);
-
     public boolean hasUid() {
-        return specified.test(uid);
+        return uid != null && !uid.isBlank();
     }
 
     public boolean hasEmail() {
-        return specified.test(email);
+        return email != null && !email.isBlank();
     }
 
     public boolean hasOrganisation() {
-        return specified.test(organisation);
+        return organisation != null && !organisation.isBlank();
     }
 }

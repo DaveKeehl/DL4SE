@@ -8,9 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
-import java.util.Objects;
-import java.util.function.Predicate;
-
 @Getter
 @Setter
 @Builder
@@ -21,11 +18,7 @@ public class TaskSearchDto {
 
     String uuid;
 
-    private static Predicate<String> notNull = Objects::nonNull;
-    private static Predicate<String> notBlank = Predicate.not(String::isBlank);
-    private static Predicate<String> specified = notNull.and(notBlank);
-
     public boolean hasUuid() {
-        return specified.test(uuid);
+        return uuid != null && !uuid.isBlank();
     }
 }
