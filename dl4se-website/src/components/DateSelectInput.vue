@@ -20,6 +20,8 @@
 </template>
 
 <script>
+const yearInMs = 1000 * 60 * 60 * 24 * 365
+
 export default {
   name: "b-date-select-input",
   props: {
@@ -29,15 +31,25 @@ export default {
       default: null
     },
     placeholder: String,
-    min: [Date, String],
-    max: [Date, String],
+    min: {
+      type: [Date, String],
+      default() {
+        return new Date(0)
+      }
+    },
+    max: {
+      type: [Date, String],
+      default() {
+        return new Date(yearInMs * 100)
+      }
+    },
   },
   computed: {
     showDecadeNav() {
       const minMs = new Date(this.min).getTime()
       const maxMs = new Date(this.max).getTime()
       const difference = maxMs - minMs
-      return difference >= (1000 * 60 * 60 * 24 * 365)
+      return difference >= yearInMs
     }
   },
   methods: {
