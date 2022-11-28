@@ -249,6 +249,21 @@
                          placeholder="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
                          v-model="taskTable.filters.uuid"
       />
+      <label for="task-filter-submitted-min">
+        Filter by Date Submitted:
+      </label>
+      <b-date-select-input id="task-filter-submitted-min"
+                           v-model="taskTable.filters.submittedMin"
+                           :min="datepickerLimits.lower"
+                           :max="datepickerLimits.upper"
+                           placeholder="YYYY-MM-DD"
+      />
+      <b-date-select-input id="task-filter-submitted-max"
+                           v-model="taskTable.filters.submittedMax"
+                           :min="datepickerLimits.lower"
+                           :max="datepickerLimits.upper"
+                           placeholder="YYYY-MM-DD"
+      />
     </b-dialog-modal>
     <b-dialog-modal id="user-filter-select"
                     title="Specify User Filters"
@@ -277,6 +292,21 @@
                          placeholder=""
                          v-model="userTable.filters.organisation"
       />
+      <label for="user-filter-registered-min">
+        Filter by Date Registered:
+      </label>
+      <b-date-select-input id="user-filter-registered-min"
+                           v-model="userTable.filters.registeredMin"
+                           :min="datepickerLimits.lower"
+                           :max="datepickerLimits.upper"
+                           placeholder="YYYY-MM-DD"
+      />
+      <b-date-select-input id="user-filter-registered-max"
+                           v-model="userTable.filters.registeredMax"
+                           :min="datepickerLimits.lower"
+                           :max="datepickerLimits.upper"
+                           placeholder="YYYY-MM-DD"
+      />
     </b-dialog-modal>
   </div>
 </template>
@@ -287,8 +317,9 @@ import formatterMixin from "@/mixins/formatterMixin"
 import routerMixin from "@/mixins/routerMixin"
 import BAbbreviation from "@/components/Abbreviation"
 import BClearableInput from "@/components/ClearableInput"
-import BConfigTable from "@/components/ConfigTable";
+import BConfigTable from "@/components/ConfigTable"
 import BContentArea from "@/components/ContentArea"
+import BDateSelectInput from "@/components/DateSelectInput"
 import BDetailsModal from "@/components/DetailsModal"
 import BDialogModal from "@/components/DialogModal"
 import BIconCalendarExclamation from "@/components/IconCalendarExclamation"
@@ -304,6 +335,7 @@ export default {
     BClearableInput,
     BConfigTable,
     BContentArea,
+    BDateSelectInput,
     BDetailsModal,
     BDialogModal,
     BIconCalendarExclamation,
@@ -315,6 +347,13 @@ export default {
   },
   mixins: [ bootstrapMixin, formatterMixin, routerMixin ],
   computed: {
+    datepickerLimits() {
+      const now = new Date()
+      return {
+        lower: new Date(2022, 0, 1),
+        upper: new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1)
+      }
+    },
     tableHeight() {
       return `${this.$screen.xl ? 370 : 380}px`
     }
@@ -394,6 +433,8 @@ export default {
       if (ctx.sortBy) params.sort = `${ctx.sortBy},${ctx.sortDesc ? "desc" : "asc"}`
       const filters = this.taskTable.filters
       if (filters.uuid) params.uuid = filters.uuid
+      if (filters.submittedMin) params.submittedMin = filters.submittedMin
+      if (filters.submittedMax) params.submittedMax = filters.submittedMax
       return this.$http.get(url, { params: params })
           .then((res) => {
             this.taskTable.totalItems = res.data.total_items
@@ -413,6 +454,8 @@ export default {
       if (filters.uid) params.uid = filters.uid
       if (filters.email) params.email = filters.email
       if (filters.organisation) params.organisation = filters.organisation
+      if (filters.registeredMin) params.registeredMin = filters.registeredMin
+      if (filters.registeredMax) params.registeredMax = filters.registeredMax
       return this.$http.get("/admin/user", { params: params })
           .then((res) => {
             this.userTable.totalItems = res.data.total_items
@@ -612,6 +655,8 @@ export default {
         id: "task-table",
         filters: {
           uuid: null,
+          submittedMin: null,
+          submittedMax: null
         },
         fields: [
           {
@@ -681,7 +726,9 @@ export default {
         filters: {
           uid: null,
           email: null,
-          organisation: null
+          organisation: null,
+          registeredMin: null,
+          registeredMax: null
         },
         fields: [
           {
