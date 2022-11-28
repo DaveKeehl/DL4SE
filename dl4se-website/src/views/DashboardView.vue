@@ -429,12 +429,13 @@ export default {
     },
     async taskProvider(ctx) {
       const url = this.isAdmin ? "/admin/task" : "/task"
-      const params = { page: ctx.currentPage, size: ctx.perPage }
-      if (ctx.sortBy) params.sort = `${ctx.sortBy},${ctx.sortDesc ? "desc" : "asc"}`
-      const filters = this.taskTable.filters
-      if (filters.uuid) params.uuid = filters.uuid
-      if (filters.submittedMin) params.submittedMin = filters.submittedMin
-      if (filters.submittedMax) params.submittedMax = filters.submittedMax
+      const direction = ctx.sortDesc ? "desc" : "asc"
+      const params = {
+        page: ctx.currentPage,
+        size: ctx.perPage,
+        sort: ctx.sortBy ? `${ctx.sortBy},${direction}` : null,
+        ...this.taskTable.filters
+      }
       return this.$http.get(url, { params: params })
           .then((res) => {
             this.taskTable.totalItems = res.data.total_items
@@ -448,14 +449,13 @@ export default {
           })
     },
     async userProvider(ctx) {
-      const params = { page: ctx.currentPage, size: ctx.perPage }
-      if (ctx.sortBy) params.sort = `${ctx.sortBy},${ctx.sortDesc ? "desc" : "asc"}`
-      const filters = this.userTable.filters
-      if (filters.uid) params.uid = filters.uid
-      if (filters.email) params.email = filters.email
-      if (filters.organisation) params.organisation = filters.organisation
-      if (filters.registeredMin) params.registeredMin = filters.registeredMin
-      if (filters.registeredMax) params.registeredMax = filters.registeredMax
+      const direction = ctx.sortDesc ? "desc" : "asc"
+      const params = {
+        page: ctx.currentPage,
+        size: ctx.perPage,
+        sort: ctx.sortBy ? `${ctx.sortBy},${direction}` : null,
+        ...this.userTable.filters
+      }
       return this.$http.get("/admin/user", { params: params })
           .then((res) => {
             this.userTable.totalItems = res.data.total_items
