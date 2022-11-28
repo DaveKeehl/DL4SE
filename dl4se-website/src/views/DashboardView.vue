@@ -275,7 +275,6 @@
       <b-clearable-input id="user-filter-uid"
                          placeholder="XXXXXXXXXXX"
                          v-model="userTable.filters.uid"
-                         class="mb-3"
       />
       <label for="user-filter-email">
         Filter by Email:
@@ -283,7 +282,6 @@
       <b-clearable-input id="user-filter-email"
                          placeholder="example@email.com"
                          v-model="userTable.filters.email"
-                         class="mb-3"
       />
       <label for="user-filter-organisation">
         Filter by Organisation:
