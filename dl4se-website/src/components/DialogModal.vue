@@ -26,16 +26,13 @@ export default {
             headerClass: "dialog-modal-header",
             bodyClass: "dialog-modal-body",
             footerClass: "dialog-modal-footer",
-            scrollable: true,
+            hideFooter: true,
             centered: true
           },
           directives: data.directives ?? [],
-          on: data.on,
-          scopedSlots: {
-            "modal-footer": () => children
-          }
+          on: data.on
         },
-        []
+        [ children ]
     )
   }
 }
